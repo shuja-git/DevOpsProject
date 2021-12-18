@@ -40,4 +40,4 @@
   tasks:
     - name: task accessing inv var
       ansible.builtin.debug:
-        msg: {{URL}}
+        msg: "{{URL}}"
