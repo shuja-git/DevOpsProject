@@ -3,4 +3,7 @@
   tasks:
     - name: task1
       ansible.builtin.debug:
-        msg: Hello from Playbook Play
+        msg: Hello from Play task1
+    - name: task2
+      ansible.builtin.debug:
+          msg: Hello from Play task2
