@@ -21,16 +21,23 @@
 #          msg: URL- {{URL}}
 
 # Task level variable
-- name: Play for task level variable
+#- name: Play for task level variable
+#  hosts: all
+#  tasks:
+#    - name: task1
+#      ansible.builtin.debug:
+#        msg: "{{URL1}}"
+#      vars:
+#        URL1: www.task1.com
+#    - name: task2
+#      ansible.builtin.debug:
+#        msg: "{{URL2}}"
+#      vars:
+#        URL2: www.task2.com
+#Inventory Level Variable
+- name: Inventory variable access
   hosts: all
   tasks:
-    - name: task1
+    - name: task accessing inv var
       ansible.builtin.debug:
-        msg: "{{URL1}}"
-      vars:
-        URL1: www.task1.com
-    - name: task2
-      ansible.builtin.debug:
-        msg: "{{URL2}}"
-      vars:
-        URL2: www.task2.com
+        msg: {{URL}}
