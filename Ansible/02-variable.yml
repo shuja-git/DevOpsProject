@@ -26,11 +26,11 @@
   tasks:
     - name: task1
       ansible.builtin.debug:
-        msg: {{URL1}}
+        msg: "{{URL1}}"
       vars:
         URL1: www.task1.com
     - name: task2
       ansible.builtin.debug:
-        msg: {{URL2}}
+        msg: "{{URL2}}"
       vars:
         URL2: www.task2.com
