@@ -1,4 +1,4 @@
 - name: play for role
-  hosts: localhost
+  hosts: FRONTEND
   roles:
-   - demo
+   - frontend
