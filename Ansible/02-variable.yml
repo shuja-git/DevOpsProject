@@ -2,8 +2,11 @@
   hosts: all
   vars:
     URL: www.example.com
+    a: 100000
   tasks:
     - name: print variable at task1
       ansible.builtin.debug:
         msg: URL = {{URL}}
-        
+    - name: print variable at task2
+      ansible.builtin.debug:
+        msg: a = {{a}}, {{URL}}
