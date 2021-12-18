@@ -47,4 +47,4 @@
   tasks:
     - name: task with cmd line var
       ansible.builtin.debug:
-        msg: "{{NEW_URL}}"
+        msg: "{{URL}}"
