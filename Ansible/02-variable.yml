@@ -26,14 +26,14 @@
   tasks:
     - name: task1
       ansible.builtin.debug:
-        msg: "{{URL1}}"
+        msg: "{{URL}}"
       vars:
-        URL1: www.task1.com
+        URL: www.task1.com
     - name: task2
       ansible.builtin.debug:
-        msg: "{{URL2}}"
+        msg: "{{URL}}"
       vars:
-        URL2: www.task2.com
+        URL: www.task2.com
 #Inventory Level Variable
 - name: Inventory variable access
   hosts: all
