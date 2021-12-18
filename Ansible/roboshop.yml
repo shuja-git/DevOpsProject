@@ -1,0 +1,4 @@
+- name: frontend
+  hosts: frontend
+  tasks:
+    - frontend
