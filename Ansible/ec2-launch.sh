@@ -8,7 +8,7 @@
 #TEMP_VER=3
 ID="lt-08d5aa9e8bc287ac7"
 VER=1
-aws ec2 run-instances --launch-template LaunchTemplateId=${ID},Version=${VER} | jq
+aws ec2 run-instances --launch-template LaunchTemplateId=${ID},Version=${VER},ImageId="ami-0760b951ddb0c20c9" | jq
 
 #TEMPL_ID="lt-06e98f843b7024a45"
 #TEMPL_VER=3
