@@ -1,21 +1,36 @@
-- name: Play Level Variable
-  hosts: all
-  vars:
-    URL: www.example.com
-    a: 100000
-  tasks:
-    - name: print variable at task1
-      ansible.builtin.debug:
-        msg: URL = {{URL}}
-    - name: print variable at task2
-      ansible.builtin.debug:
-        msg: a = {{a}}, {{URL}}
+#- name: Play Level Variable
+#  hosts: all
+#  vars:
+#    URL: www.example.com
+#    a: 100000
+#  tasks:
+#    - name: print variable at task1
+#      ansible.builtin.debug:
+#        msg: URL = {{URL}}
+#    - name: print variable at task2
+#      ansible.builtin.debug:
+#        msg: a = {{a}}, {{URL}}
+#
+#- name: Play for Variable from file
+#  hosts: all
+#  vars_files:
+#     - sample-vars.yml
+#  tasks:
+#      - name: Print URL
+#        ansible.builtin.debug:
+#          msg: URL- {{URL}}
 
-- name: Play for Variable from file
+# Task level variable
+- name: Play for task level variable
   hosts: all
-  vars_files:
-     - sample-vars.yml
   tasks:
-      - name: Print URL
-        ansible.builtin.debug:
-          msg: URL- {{URL}}
+    - name: task1
+      ansible.builtin.debug:
+        msg: {{URL1}}
+      vars:
+        URL1: www.task1.com
+    - name: task2
+      ansible.builtin.debug:
+        msg: {{URL2}}
+      vars:
+        URL2: www.task2.com
