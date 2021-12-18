@@ -12,7 +12,7 @@
         msg: a = {{a}}, {{URL}}
  - name: Play for Variable from file
    hosts: all
-   vars_file:
+   vars_files:
      - sample-vars.yml
     tasks:
       - name: Print URL
