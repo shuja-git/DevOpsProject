@@ -48,3 +48,10 @@
     - name: task with cmd line var
       ansible.builtin.debug:
         msg: "{{URL}}"
+# ansible pre-defined variables
+- name: variables from facts
+  hosts: all
+  tasks:
+    - name: Print facts
+      ansible.builtin.debug:
+        msg: Hostname = {{ansible_fqdn}}
