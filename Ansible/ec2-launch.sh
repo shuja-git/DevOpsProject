@@ -10,6 +10,7 @@
 #VER=1
 #aws ec2 run-instances --launch-template LaunchTemplateId=${ID},Version=${VER} | jq
 
-TEMPL_ID="lt-06e98f843b7024a45"
-TEMPL_VER=4
-aws ec2 run-instances --launch-template LaunchTemplateId=${TEMPL_ID},Version=${TEMPL_VER} | jq
+#TEMPL_ID="lt-06e98f843b7024a45"
+#TEMPL_VER=4
+#aws ec2 run-instances --launch-template LaunchTemplateId=${TEMPL_ID},Version=${TEMPL_VER} | jq
+aws ec2 modify-launch-template --launch-template-id "lt-06e98f843b7024a45" --default-version "3" --region "us-east-1"
