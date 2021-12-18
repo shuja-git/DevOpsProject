@@ -54,4 +54,4 @@
   tasks:
     - name: Print facts
       ansible.builtin.debug:
-        msg: Hostname = {{ansible_fqdn}}
+        msg: Hostname = {{ansible_fqdn}}, user={{ansible_user_id}}, {{ansible_nodename}}
