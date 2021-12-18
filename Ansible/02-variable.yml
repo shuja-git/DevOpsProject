@@ -1,57 +1,63 @@
-- name: Play Level Variable
+#- name: Play Level Variable
+#  hosts: all
+#  vars:
+#    URL: www.example.com
+#    a: 100000
+#  tasks:
+#    - name: print variable at task1
+#      ansible.builtin.debug:
+#        msg: URL = {{URL}}
+#    - name: print variable at task2
+#      ansible.builtin.debug:
+#        msg: a = {{a}}, {{URL}}
+#
+#- name: Play for Variable from file
+#  hosts: all
+#  vars_files:
+#     - sample-vars.yml
+#  tasks:
+#      - name: Print URL
+#        ansible.builtin.debug:
+#          msg: URL- {{URL}}
+#
+## Task level variable
+#- name: Play for task level variable
+#  hosts: all
+#  tasks:
+#    - name: task1
+#      ansible.builtin.debug:
+#        msg: "{{URL}}"
+#      vars:
+#        URL: www.task1.com
+#    - name: task2
+#      ansible.builtin.debug:
+#        msg: "{{URL}}"
+#      vars:
+#        URL: www.task2.com
+##Inventory Level Variable
+#- name: Inventory variable access
+#  hosts: all
+#  tasks:
+#    - name: task accessing inv var
+#      ansible.builtin.debug:
+#        msg: "{{URL}}"
+## Command Line variable
+#- name: Play for command line var
+#  hosts: all
+#  tasks:
+#    - name: task with cmd line var
+#      ansible.builtin.debug:
+#        msg: "{{URL}}"
+## ansible pre-defined variables
+#- name: variables from facts
+#  hosts: all
+#  tasks:
+#    - name: Print facts
+#      ansible.builtin.debug:
+#        msg: Hostname = {{ansible_fqdn}}, user={{ansible_user_id}}, {{ansible_nodename}}
+#Ansible Runtime Variables
+- name: Register variable
   hosts: all
-  vars:
-    URL: www.example.com
-    a: 100000
   tasks:
-    - name: print variable at task1
-      ansible.builtin.debug:
-        msg: URL = {{URL}}
-    - name: print variable at task2
-      ansible.builtin.debug:
-        msg: a = {{a}}, {{URL}}
-
-- name: Play for Variable from file
-  hosts: all
-  vars_files:
-     - sample-vars.yml
-  tasks:
-      - name: Print URL
-        ansible.builtin.debug:
-          msg: URL- {{URL}}
-
-# Task level variable
-- name: Play for task level variable
-  hosts: all
-  tasks:
-    - name: task1
-      ansible.builtin.debug:
-        msg: "{{URL}}"
-      vars:
-        URL: www.task1.com
-    - name: task2
-      ansible.builtin.debug:
-        msg: "{{URL}}"
-      vars:
-        URL: www.task2.com
-#Inventory Level Variable
-- name: Inventory variable access
-  hosts: all
-  tasks:
-    - name: task accessing inv var
-      ansible.builtin.debug:
-        msg: "{{URL}}"
-# Command Line variable
-- name: Play for command line var
-  hosts: all
-  tasks:
-    - name: task with cmd line var
-      ansible.builtin.debug:
-        msg: "{{URL}}"
-# ansible pre-defined variables
-- name: variables from facts
-  hosts: all
-  tasks:
-    - name: Print facts
-      ansible.builtin.debug:
-        msg: Hostname = {{ansible_fqdn}}, user={{ansible_user_id}}, {{ansible_nodename}}
+    - name: uptime command
+      ansible.builtin.shell: uptime
