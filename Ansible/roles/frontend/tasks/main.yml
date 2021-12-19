@@ -16,7 +16,7 @@
 ## systemctl restart nginx
 
 
-- name: Install the latest version of Apache
+- name: Install nginx
   ansible.builtin.yum:
     name: nginx
     state: installed

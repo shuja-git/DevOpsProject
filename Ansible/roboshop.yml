@@ -1,4 +1,4 @@
 - name: frontend setup
   hosts: FRONTEND
-  tasks:
+  roles:
     - frontend
