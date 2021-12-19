@@ -8,7 +8,7 @@
 #TEMP_VER=3
 ID="lt-08d5aa9e8bc287ac7"
 VER=2
-aws ec2 run-instances --launch-template LaunchTemplateId=${ID},Version=${VER} --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=frontend}]" "ResourceType=spot-instance-request,Tags=[{Key=Name,Value=frontend}]" | jq
+aws ec2 run-instances --launch-template LaunchTemplateId=${ID},Version=${VER} --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=frontend}]" "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=frontend}]" | jq
 
 #TEMPL_ID="lt-06e98f843b7024a45"
 #TEMPL_VER=3
