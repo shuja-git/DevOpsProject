@@ -39,3 +39,14 @@
     src: /tmp/frontend-main/static/
     dest: /usr/share/nginx/html/
     remote_src: yes
+
+- name: copy roboshop reverse proxy configuration
+  ansible.builtin.copy:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
+- name: restart
+  ansible.builtin.systemd:
+    state: restarted
+    name: nginx
+    enabled: yes
