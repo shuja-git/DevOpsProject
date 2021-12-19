@@ -21,5 +21,11 @@ fi
 
 ID="lt-08d5aa9e8bc287ac7"
 VER=2
+ZONE_ID=Z078908237A6SF5H7OAQ8
 aws ec2 run-instances --launch-template LaunchTemplateId=${ID},Version=${VER} --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=${COMPONENT}}]" | jq
 
+IPADDRESS=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend" | jq .Reservations[].Instances[].PrivateIpAddress | sed 's/"//g')
+
+#Update the DNS Record
+sed -e "s/IPADDRESS/${IPADDRESS}/" -e "/COMPONENT/${COMPONENT}/" record.json >/tmp/record.json
+aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json | jq
