@@ -1,4 +1,4 @@
-- name: frontend
-  hosts: frontend
+- name: frontend setup
+  hosts: FRONTEND
   tasks:
     - frontend
