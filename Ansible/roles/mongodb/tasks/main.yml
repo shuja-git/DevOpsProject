@@ -1,10 +1,12 @@
+
 #  Setup MongoDB repos.
 #    # curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
-#    Install Mongo & Start Service.
+#    & Start Service.
 #    # yum install -y mongodb-org
 #    # systemctl enable mongod
 #    # systemctl start mongod
 #    Update Liste IP address from 127.0.0.1 to 0.0.0.0 in config file
+#     (google: search and replace ansible module)
 #  Config file: /etc/mongod.conf
 #
 #    then restart the service
@@ -20,29 +22,47 @@
 #  # cd mongodb-main
 #  # mongo < catalogue.js
 #  # mongo < users.js
-#--------------------------------------------------------------
-#- name: Copy mongodb repo file
-#  ansible.builtin.copy:
-#    src: mongo.repo
-#    dest: /etc/yum.repos.d/mongo.repo
-#
-#- name: install mongodb
-#  ansible.builtin.yum:
-#    name: mongodb-org
-#    state: installed
-#
-## update entry in the mongod.conf file
-#- name: Update Mongodb config file to listen on 0.0.0.0
-#  ansible.builtin.replace:
-#    path: /etc/mongod.conf
-#    regexp: '127.0.0.1'
-#    replace: '0.0.0.0'
-#
-#
-##start the mongod service
-#- name: Start MongoDB service
-#  ansible.builtin.service:
-#    name: mongod
-#    state: started
-#    enabled: yes
 
+#-----------------------------------------------------------------
+#create a directory 'files' in that create a file 'mongo.repo' and copy
+# repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
+- name: Copy MongoDB repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+# Install Mongo
+- name: Install MongoDB
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+
+# Update Liste IP address from 127.0.0.1 to 0.0.0.0 in config file
+- name: Update MongoDB config file to listen on 0.0.0.0
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+# start mongod
+- name: Start MongoDB Service
+  ansible.builtin.systemd:
+    name: mongod
+    state: started
+    enabled: yes
+
+#
+#- name: Download MongoDB Schema files
+#  ansible.builtin.import_role:
+#    name: common
+#    tasks_from: download
+#
+#- name: Load Catalogue Schema
+#  community.mongodb.mongodb_shell:
+#    file: "/tmp/mongodb-main/catalogue.js"
+#    idempotent: yes
+#
+#- name: Load Users Schema
+#  community.mongodb.mongodb_shell:
+#    file: "/tmp/mongodb-main/users.js"
+#    idempotent: yes
