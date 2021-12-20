@@ -56,7 +56,9 @@
 # as the above code is common between frontend and mongodb and other components
 # so we create a directory with name 'common' and in that create another dir tasks
 # and in that create a file 'download.yml' in that file paste the module and change
-# the frontend or mongodb with variable {COMPONENT}.
+# the frontend or mongodb with variable {COMPONENT}. create a var dir and in that main.yml
+# and declare COMPONENT: frontend, similary create in mongodb dir also and declare
+# COMPONENT: mongodb
 # (paste the below module in download.yml file.)
 # - name: Download and Unzip the {COMPONENT} content
 #  ansible.builtin.unarchive:
