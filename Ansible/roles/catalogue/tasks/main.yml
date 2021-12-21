@@ -71,8 +71,32 @@
 #
 #    NOTE: We need to update the IP address of MONGODB Server in systemd.service file
 #      Now, lets set up the service with systemctl.
-#
+# copy the content of systemd.service file from catalogue server
+# and in that /home/roboshop/catalogue/
 #    # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+# here create 1 dir 'file' and in that create a file 'systemd.service and paste
+# here discussing a point in view of automation 'multiple environments' SO change
+# the file name i.e, rename file with template and paste with ENV variable.
+#[Unit]
+#Description = Catalogue Service
+#[Service]
+#User=roboshop
+#Environment=MONGO_URL="mongodb://mongodb-{{ENV}}.roboshop.internal:27017/catalogue"
+#ExecStart=/bin/node /home/roboshop/catalogue/server.js
+#SyslogIdentifier=catalogue
+#
+#[Install]
+#WantedBy=multi-user.target
+# so above replacement cannot be done by copy module so we use template module:
+- name: update catalogue systemd file
+  ansible.builtin.template:
+    src: systemd.service
+    dest: /etc/systemd/system/catalogue.service
+
+
+
+
+
 # Update the roboshop.yml file
 #- name: catalogue setup
 #  hosts: catalogue

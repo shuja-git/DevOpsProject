@@ -9,6 +9,12 @@ if [ -z "$1" ]; then
 fi
 
 COMPONENT=$1
+# i want - in between that means if i give ansible-playbook roboshop.yml frontend dev then
+# it will convert as ansible-playbook roboshop.yml frontend-dev
+ENV=$2
+if [ ! -z "$ENV" ]; then
+  ENV="-${ENV}"
+fi
 
 
 ID="lt-08d5aa9e8bc287ac7"
@@ -30,10 +36,11 @@ sed -e "s/IP/${IP}/" -e "s/COMPONENT/${COMPONENT}/" record.json >/tmp/record.jso
 aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json | jq
 }
 if [ "$COMPONENT" == "all" ]; then
-  for comp in frontend mongodb catalogue ; do
+  for comp in frontend$ENV mongodb$ENV catalogue$ENV ; do
     COMPONENT=$comp
      CREATE_INSTANCE
   done
   else
+    COMPONENT=$COMPONENT$ENV
     CREATE_INSTANCE
 fi
