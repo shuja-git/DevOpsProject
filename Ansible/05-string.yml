@@ -3,12 +3,12 @@
   tasks:
     - name: "Searching for a String"
       lineinfile:
-          path: /tmp/1.txt
-          line: "password"
-          state: present
+        path: /tmp/1.txt
+        line: "password"
+        state: present
       check_mode: yes
       register: presence
 
     - name: "print output"
       debug:
-        msg: "{{present}}"
+        msg: "{{presence}}"
