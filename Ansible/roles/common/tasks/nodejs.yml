@@ -131,7 +131,7 @@
 # in a single module
 - name: start {{COMPONENT}} Service
   ansible.builtin.systemd:
-    name: {{COMPONENT}}
+    name: "{{COMPONENT}}"
     state: restarted
     enabled: yes
     daemon_reload: yes
