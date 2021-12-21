@@ -1,0 +1,77 @@
+
+#
+
+#  # systemctl daemon-reload
+#  # systemctl start catalogue
+#  # systemctl enable catalogue
+#-------------------------------------------------------------------------------------------------------------
+# yum install nodejs make gcc-c++ -y
+# here we have to install 3 packages so first we need to check whether yum module supports installing all
+# packages at once or do we have to write it 3 times speparately for each package.
+# (google: yum module ansible)
+- name: Import NodeJS for Catalogue
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs
+#----------------------------------
+# useradd roboshop
+#(google:add a user ansible module)
+# in shell scripting we have to check whether user already exists, but in ansible user module
+# will take care of that
+- name: Add application user
+  ansible.builtin.user:
+    name: roboshop
+#---------------------------------------
+#curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
+#create in this dir another dir 'vars' and in that create a file 'main.yml' and in that declare a variable
+#COMPONENT: catalogue
+- name: Download and Unzip the catalogue content
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: download
+#-----------------------------
+#    $ cd /home/roboshop
+#    $ unzip /tmp/catalogue.zip
+#    $ mv catalogue-main catalogue
+# here we have to unzip in /tmp and copy to /tmp/catalogue.zip
+# so same thing we have done in frontend so copy that modules
+# So let's switch to the roboshop user and run the following commands.
+# but these steps should be run as a normal user but u r performing as a root user so
+# u need to think about the fixing of permissions , so copy module has a permission to fix
+# (google: copy module ansible) here we have option of declaring as owner, but in ansible
+# there is an option 'become_user: roboshop' we can use this also. 'become' is there to execute
+# as a root user, 'become_user' is there to execute that particular task as another user.
+- name: remove old App content
+  ansible.builtin.file:
+    path: /home/roboshop/catalogue
+    state: absent
+
+- name: copy the App content
+  ansible.builtin.copy:
+    src: /tmp/catalogue-main/
+    dest: /home/roboshop/catalogue
+    remote_src: yes
+#-----------------------------------
+# $ npm install
+#(google: npm module ansible)
+# $ cd /home/roboshop/catalogue (run this task as roboshop user)
+- name: Install NodejS Dependencies.
+  community.general.npm:
+    path: /home/roboshop/catalogue
+  become_user: roboshop
+#------------------------------------
+#
+#    NOTE: We need to update the IP address of MONGODB Server in systemd.service file
+#      Now, lets set up the service with systemctl.
+#
+#    # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+# Update the roboshop.yml file
+#- name: catalogue setup
+#  hosts: catalogue
+#  become: yes
+#  roles:
+#    - catalogue
+#
+
+
+
