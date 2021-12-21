@@ -15,11 +15,11 @@
       debug:
           msg: Hello from common
 
-  - name: Play level tags
-    tags: frontend
-    hosts: localhost
-    tasks:
-      - name: frontend play
-        debug:
+    - name: Play level tags
+      tags: frontend
+      hosts: localhost
+      tasks:
+       - name: frontend play
+         debug:
           msg: play level tags
 
