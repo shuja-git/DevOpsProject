@@ -10,3 +10,7 @@
       debug:
           msg: Hello from frontend
       tags: frontend
+
+    - name: tasks common
+        debug:
+          msg: Hello from common
