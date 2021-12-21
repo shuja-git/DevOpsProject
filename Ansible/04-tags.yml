@@ -5,5 +5,5 @@
       debug:
         msg: Hello from catalogue
     - name: tasks from frontend
-        debug:
+      debug:
           msg: Hello from frontend
