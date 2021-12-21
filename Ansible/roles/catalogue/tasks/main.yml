@@ -9,10 +9,17 @@
 # here we have to install 3 packages so first we need to check whether yum module supports installing all
 # packages at once or do we have to write it 3 times speparately for each package.
 # (google: yum module ansible)
-- name: Import NodeJS for Catalogue
-  ansible.builtin.import_role:
-    name: common
-    tasks_from: nodejs
+- name: Install NodeJS Service
+  ansible.builtin.yum:
+    name:
+      - nodejs
+      - make
+      - gcc-c++
+    state: installed
+#- name: Import NodeJS for Catalogue
+#  ansible.builtin.import_role:
+#    name: common
+#    tasks_from: nodejs
 #----------------------------------
 # useradd roboshop
 #(google:add a user ansible module)
