@@ -4,6 +4,9 @@
     - name: tasks from catalogue
       debug:
         msg: Hello from catalogue
+      tags: catalogue
+
     - name: tasks from frontend
       debug:
           msg: Hello from frontend
+      tags: frontend
