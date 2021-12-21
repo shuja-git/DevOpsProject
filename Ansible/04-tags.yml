@@ -12,5 +12,5 @@
       tags: frontend
 
     - name: tasks common
-        debug:
+      debug:
           msg: Hello from common
