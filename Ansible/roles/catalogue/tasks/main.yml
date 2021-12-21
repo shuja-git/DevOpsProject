@@ -56,7 +56,7 @@
 - name: copy the App content
   ansible.builtin.copy:
     src: /tmp/catalogue-main/
-    dest: /home/roboshop/catalogue
+    dest: /home/roboshop/catalogue/
     remote_src: yes
 #-----------------------------------
 # $ npm install
