@@ -36,8 +36,8 @@ sed -e "s/IP/${IP}/" -e "s/COMPONENT/${COMPONENT}/" record.json >/tmp/record.jso
 aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json | jq
 }
 if [ "$COMPONENT" == "all" ]; then
-  for comp in frontend$ENV mongodb$ENV catalogue$ENV ; do
-    COMPONENT=$comp
+  for comp in frontend mongodb catalogue user cart shipping rabbitmq redis mysql payment dispatch; do
+    COMPONENT=$comp$ENV
      CREATE_INSTANCE
   done
   else
