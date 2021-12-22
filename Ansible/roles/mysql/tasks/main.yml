@@ -39,9 +39,11 @@
 #------------------------------------
 #    Install MySQL
 #    # yum install mysql-community-server -y
-- name: Install mysql
+- name: Install mysql server & Ansible mysql module
   ansible.builtin.yum:
-    name: mysql-community-server
+    name:
+      - mysql-community-server
+      - MySQL-python
     state: installed
 #------------------------------------
 #    Start MySQL.
