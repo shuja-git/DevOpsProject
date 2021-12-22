@@ -5,7 +5,7 @@
 
 
 #
-#    Next, We need to change the default root password in order to start using the database service.
+#
 #    # mysql_secure_installation
 #
 #    You can check the new password working or not using the following command.
@@ -61,6 +61,30 @@
   ansible.builtin.shell:  grep 'temporary password' /var/log/mysqld.log  | awk '{print $NF}'
   register: mysql_default_password
 
-- name: print the password
-  debug:
-    msg: "{{mysql_default_password}}"
+#- name: print the password
+#  debug:
+#    msg: "{{mysql_default_password.stdout}}"
+-
+#  Next, We need to change the default root password in order to start using the database service.
+# create a dir 'templates' in mysql role and in that create a file 'root-pass-reset.sql' and
+# paste ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_ROOT_PASSWORD}}'; and declare this
+# variable by creating a dir 'vars' in mysql role and in that create a file 'main.yml'
+# MYSQL_ROOT_PASSWORD: Roboshop@1 (here we are hardcoding the password so that if no password is
+# entered then it will take this password and if password is entered then it will override this password
+
+- name: copy sql script for password reset
+  ansible.builtin.template:
+    src: root-pass-reset.sql
+    dest: /tmp/root-pass-reset.sql
+
+# change the password
+#(google: mysql module ansible) here click on 'communityMysql'
+- name: change the password
+  community.mysql.mysql_db:
+     state: import
+     name: all
+     target: /tmp/root-pass-reset.sql
+    login_password: root
+    login_user: "{{mysql_default_password.stdout}}"
+
+
