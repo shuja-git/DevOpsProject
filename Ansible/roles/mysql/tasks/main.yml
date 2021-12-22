@@ -84,7 +84,7 @@
      state: import
      name: all
      target: /tmp/root-pass-reset.sql
-    login_password: root
-    login_user: "{{mysql_default_password.stdout}}"
+     login_password: root
+     login_user: "{{mysql_default_password.stdout}}"
 
 
