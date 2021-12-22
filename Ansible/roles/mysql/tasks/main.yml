@@ -81,12 +81,18 @@
 
 # change the password
 #(google: mysql module ansible) here click on 'communityMysql'
+
+#- name: change the password
+#  community.mysql.mysql_db:
+#     state: import
+#     name: all
+#     target: /tmp/root-pass-reset.sql
+#     login_password: root
+#     login_user: "{{mysql_default_password.stdout}}"
+
+#mysql supports only one command to connect to the database for expired password which is mysql
+# command line. So use shell module not the above one:
 - name: change the password
-  community.mysql.mysql_db:
-     state: import
-     name: all
-     target: /tmp/root-pass-reset.sql
-     login_password: root
-     login_user: "{{mysql_default_password.stdout}}"
+  ansible.builtin.shell:  mysql --connect-expired-password -uroot -p"{{mysql_default_password.stdout}}" </tmp/root-pass-reset.sql
 
 
