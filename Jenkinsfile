@@ -10,7 +10,7 @@
 //   }
 // }
 node {
- stages('One'){
+ stage('One'){
     sh 'echo Hello from scripted Pipeline'
  }
 }
