@@ -13,4 +13,7 @@ node {
  stage('One'){
     sh 'echo Hello from scripted Pipeline'
  }
+ stage('Two'){
+     sh 'echo Hello from scripted Pipeline'
+  }
 }
