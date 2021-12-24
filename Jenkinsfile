@@ -9,6 +9,16 @@
 //     }
 //   }
 // }
+pipeline {
+    agent any
+    stages  {
+        stage('Ansible playbook run') {
+            steps {
+             sh 'ansible-playbook 04-tags.yml'
+            }
+        }
+    }
+}
 // pipeline {
 //     agent any
 //
@@ -26,15 +36,15 @@
 //     }
 // }
 // within 1 stage 2 steps not permitted
-pipeline{
-    agent any
-
-    stages {
-        stage('Stage1') {
-            steps {
-              sh '''echo Hello world
-              echo Bye world'''
-
-        }
-    }
-}
+// pipeline{
+//     agent any
+//
+//     stages {
+//         stage('Stage1') {
+//             steps {
+//               sh '''echo Hello world
+//               echo Bye world'''
+//
+//         }
+//     }
+// }
