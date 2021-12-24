@@ -1,14 +1,35 @@
+// pipeline {
+//   agent { label 'WORKSTATION' }
+//
+//   stages {
+//     stage('Ansible Playbook run') {
+//       steps {
+//         sh 'ansible-playbook 04-tags.yml'
+//       }
+//     }
+//   }
+// }
 pipeline {
   agent { label 'WORKSTATION' }
+//   options {
+//     ansiColor('xterm')
+//   }
 
   stages {
-    stage('Ansible Playbook run') {
+    stage('Ansible Playbook Run') {
       steps {
         sh 'ansible-playbook 04-tags.yml'
       }
     }
   }
+
 }
+
+
+
+
+
+
 // pipeline {
 //     agent any
 //     stages  {
