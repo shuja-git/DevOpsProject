@@ -25,15 +25,15 @@
 //         }
 //     }
 // }
+// within 1 stage 2 steps not permitted
 pipeline{
     agent any
 
     stages {
         stage('Stage1') {
             steps {
-                echo 'from stage1 steps1'
-                echo 'within the steps1'
-            }
+              sh '''echo Hello world
+              echo Bye world'''
 
         }
     }
