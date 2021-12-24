@@ -9,18 +9,32 @@
 //     }
 //   }
 // }
-pipeline {
+// pipeline {
+//     agent any
+//
+//     stages {
+//         stage('Hello') {
+//             steps {
+//                 echo 'Hello World'
+//             }
+//           }
+//         stage('Hi'){
+//             steps{
+//                 echo 'Hi World'
+//             }
+//         }
+//     }
+// }
+pipeline{
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Stage1') {
             steps {
-                echo 'Hello World'
+                echo 'from stage1 steps1'
             }
-          }
-        stage('Hi'){
-            steps{
-                echo 'Hi World'
+            steps {
+                echo 'from stage1 steps2'
             }
         }
     }
