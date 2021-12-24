@@ -32,10 +32,9 @@ pipeline{
         stage('Stage1') {
             steps {
                 echo 'from stage1 steps1'
+                echo 'within the steps1'
             }
-            steps {
-                echo 'from stage1 steps2'
-            }
+
         }
     }
 }
