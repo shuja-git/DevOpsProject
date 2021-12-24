@@ -14,7 +14,7 @@ pipeline {
     stages  {
         stage('Ansible playbook run') {
             steps {
-             sh 'ansible-playbook 04-tags.yml'
+             sh 'echo Hello'
             }
         }
     }
