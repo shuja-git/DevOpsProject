@@ -1,9 +1,9 @@
 pipeline{
     agent any
     stages {
-        stage('testing'){
+        stage('ansible testing'){
             steps {
-                sh 'echo new testing'
+                sh 'ansible-playbook 04-tags.yml'
             }
         }
     }
