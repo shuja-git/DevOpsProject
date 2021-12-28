@@ -3,7 +3,7 @@ pipeline{
     stages {
         stage('ansible testing'){
             steps {
-                sh 'ansible-playbook 04-tags.yml'
+                sh 'ansible-playbook 01-simple-playbook.yml'
             }
         }
     }
