@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent { label 'WORKSTATION' }
     stages {
         stage('ansible testing'){
             steps {
