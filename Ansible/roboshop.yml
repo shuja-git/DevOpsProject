@@ -1,48 +1,48 @@
 - name: frontend setup
   hosts: frontend
   become: yes
-  tags: frontend
+  tags: FRONTEND
   roles:
     - frontend
 
 - name: mongodb setup
   hosts: mongodb
   become: yes
-  tags: mongodb
+  tags: MONGODB
   roles:
     - mongodb
 
 - name: catalogue setup
   hosts: catalogue
   become: yes
-  tags: catalogue
+  tags: CATALOGUE
   roles:
     - catalogue
 
 - name: redis setup
   hosts: redis
   become: yes
-  tags: redis
+  tags: REDIS
   roles:
     - redis
 
 - name: user setup
   hosts: user
   become: yes
-  tags: user
+  tags: USER
   roles:
     - user
 
 - name: cart setup
   hosts: cart
   become: yes
-  tags: cart
+  tags: CART
   roles:
     - cart
 
 - name: mysql setup
   hosts: mysql
   become: yes
-  tags: mysql
+  tags: MYSQL
   roles:
     - mysql
